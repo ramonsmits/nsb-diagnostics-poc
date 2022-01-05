@@ -55,7 +55,7 @@ namespace WorkerService
 
                     endpointConfiguration.AuditProcessedMessagesTo("audit");
 
-                    //endpointConfiguration.AuditSagaStateChanges("Particular.ServiceControl.2");
+                    endpointConfiguration.AuditSagaStateChanges("audit");
 
                     var settings = endpointConfiguration.GetSettings();
 
