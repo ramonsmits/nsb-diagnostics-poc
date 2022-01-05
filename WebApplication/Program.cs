@@ -30,15 +30,6 @@ namespace WebApplication
             };
             ActivitySource.AddActivityListener(listener);
 
-
-
-
-
-
-
-
-
-
             var host = CreateHostBuilder(args).Build();
 
             SeedDb(host);

@@ -33,13 +33,9 @@ namespace WebApplication.Controllers
             
             Activity.Current?.AddBaggage("cart.operation.id", command.Id.ToString());
 
-
             //Activity.Current?.AddTag("operation.id", command.Id.ToString());
 
-
             _logger.LogInformation("Sending message {message} with {id}", command.Message, command.Id);
-
-
 
             await _messageSession.Send(command);
 
