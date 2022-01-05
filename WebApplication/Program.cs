@@ -81,7 +81,7 @@ namespace WebApplication
 
                     endpointConfiguration.EnableInstallers();
 
-                    endpointConfiguration.AuditProcessedMessagesTo("NsbActivities.Audit");
+                    endpointConfiguration.AuditProcessedMessagesTo("audit");
 
                     var settings = endpointConfiguration.GetSettings();
 

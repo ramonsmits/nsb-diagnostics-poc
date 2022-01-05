@@ -58,7 +58,7 @@ namespace ChildWorkerService
 
                     endpointConfiguration.EnableInstallers();
 
-                    endpointConfiguration.AuditProcessedMessagesTo("NsbActivities.Audit");
+                    endpointConfiguration.AuditProcessedMessagesTo("audit");
 
                     var recoverability = endpointConfiguration.Recoverability();
                     recoverability.Immediate(i => i.NumberOfRetries(1));

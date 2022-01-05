@@ -53,7 +53,7 @@ namespace WorkerService
 
                     endpointConfiguration.EnableInstallers();
 
-                    endpointConfiguration.AuditProcessedMessagesTo("NsbActivities.Audit");
+                    endpointConfiguration.AuditProcessedMessagesTo("audit");
 
                     //endpointConfiguration.AuditSagaStateChanges("Particular.ServiceControl.2");
 
