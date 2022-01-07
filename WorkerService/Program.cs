@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using Azure.Monitor.OpenTelemetry.Exporter;
 using ChildWorkerService.Messages;
+using Honeycomb.OpenTelemetry;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NServiceBus;
@@ -86,6 +87,12 @@ namespace WorkerService
                         .AddAzureMonitorTraceExporter(c =>
                         {
                             c.ConnectionString = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
+                        })
+                        .AddHoneycomb(new HoneycombOptions
+                        {
+                            ServiceName = "spike",
+                            ApiKey = Environment.GetEnvironmentVariable("HONEYCOMB_APIKEY"),
+                            Dataset = "spike"
                         })
                     );
 

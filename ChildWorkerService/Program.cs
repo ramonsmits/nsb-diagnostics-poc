@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using Azure.Monitor.OpenTelemetry.Exporter;
+using Honeycomb.OpenTelemetry;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Mongo2Go;
@@ -108,6 +109,12 @@ namespace ChildWorkerService
                         .AddAzureMonitorTraceExporter(c =>
                         {
                             c.ConnectionString = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
+                        })
+                        .AddHoneycomb(new HoneycombOptions
+                        {
+                            ServiceName = "spike",
+                            ApiKey = Environment.GetEnvironmentVariable("HONEYCOMB_APIKEY"),
+                            Dataset = "spike"
                         })
                         );
                 })

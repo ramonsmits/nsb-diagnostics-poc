@@ -1,5 +1,6 @@
 using System;
 using Azure.Monitor.OpenTelemetry.Exporter;
+using Honeycomb.OpenTelemetry;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -51,6 +52,12 @@ namespace WebApplication
                 .AddAzureMonitorTraceExporter(c =>
                 {
                     c.ConnectionString = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
+                })
+                .AddHoneycomb(new HoneycombOptions
+                {
+                    ServiceName = "spike",
+                    ApiKey = Environment.GetEnvironmentVariable("HONEYCOMB_APIKEY"),
+                    Dataset = "spike"
                 })
             );
         }

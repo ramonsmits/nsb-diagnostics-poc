@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0-beta.3" />
+    <PackageReference Include="Honeycomb.OpenTelemetry" Version="0.18.0-beta" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="NServiceBus.Extensions.Diagnostics" Version="1.1.0" />
     <PackageReference Include="NServiceBus.Extensions.Diagnostics.OpenTelemetry" Version="1.0.1-alpha.0.2" />
