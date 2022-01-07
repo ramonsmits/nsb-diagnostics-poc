@@ -73,10 +73,10 @@ namespace WorkerService
                         .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(EndpointName))
                         .AddNServiceBusInstrumentation()
                         .AddHttpClientInstrumentation()
-                        .AddZipkinExporter(o =>
-                        {
-                            o.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
-                        })
+                        //.AddZipkinExporter(o =>
+                        //{
+                        //    o.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
+                        //})
                         .AddJaegerExporter(c =>
                         {
                             c.AgentHost = "localhost";

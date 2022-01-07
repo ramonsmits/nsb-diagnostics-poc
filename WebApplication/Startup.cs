@@ -38,10 +38,10 @@ namespace WebApplication
                 })
                 .AddSqlClientInstrumentation(opt => opt.SetDbStatementForText = true)
                 .AddNServiceBusInstrumentation()
-                .AddZipkinExporter(o =>
-                {
-                    o.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
-                })
+                //.AddZipkinExporter(o =>
+                //{
+                //    o.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
+                //})
                 .AddJaegerExporter(c =>
                 {
                     c.AgentHost = "localhost";
