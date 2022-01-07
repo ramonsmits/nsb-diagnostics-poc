@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using Azure.Monitor.OpenTelemetry.Exporter;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Mongo2Go;
@@ -77,7 +78,7 @@ namespace ChildWorkerService
                 .ConfigureServices(services =>
                 {
                     var runner = MongoDbRunner.Start(singleNodeReplSet: true, singleNodeReplSetWaitTimeout: 20);
-                    
+
                     services.AddSingleton(runner);
                     var urlBuilder = new MongoUrlBuilder(runner.ConnectionString)
                     {
@@ -85,7 +86,7 @@ namespace ChildWorkerService
                     };
                     var mongoUrl = urlBuilder.ToMongoUrl();
                     var mongoClientSettings = MongoClientSettings.FromUrl(mongoUrl);
-                    mongoClientSettings.ClusterConfigurator = cb => cb.Subscribe(new DiagnosticsActivityEventSubscriber(new InstrumentationOptions{CaptureCommandText = true}));
+                    mongoClientSettings.ClusterConfigurator = cb => cb.Subscribe(new DiagnosticsActivityEventSubscriber(new InstrumentationOptions { CaptureCommandText = true }));
                     var mongoClient = new MongoClient(mongoClientSettings);
                     services.AddSingleton(mongoUrl);
                     services.AddSingleton(mongoClient);
@@ -103,7 +104,12 @@ namespace ChildWorkerService
                         {
                             c.AgentHost = "localhost";
                             c.AgentPort = 6831;
-                        }));
+                        })
+                        .AddAzureMonitorTraceExporter(c =>
+                        {
+                            c.ConnectionString = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
+                        })
+                        );
                 })
         ;
     }

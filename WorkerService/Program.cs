@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Net.Http;
+using Azure.Monitor.OpenTelemetry.Exporter;
 using ChildWorkerService.Messages;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -81,6 +82,10 @@ namespace WorkerService
                         {
                             c.AgentHost = "localhost";
                             c.AgentPort = 6831;
+                        })
+                        .AddAzureMonitorTraceExporter(c =>
+                        {
+                            c.ConnectionString = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
                         })
                     );
 

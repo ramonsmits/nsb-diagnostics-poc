@@ -1,4 +1,5 @@
 using System;
+using Azure.Monitor.OpenTelemetry.Exporter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,10 @@ namespace WebApplication
                 {
                     c.AgentHost = "localhost";
                     c.AgentPort = 6831;
+                })
+                .AddAzureMonitorTraceExporter(c =>
+                {
+                    c.ConnectionString = Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY");
                 })
             );
         }
